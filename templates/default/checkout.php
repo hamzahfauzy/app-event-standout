@@ -39,8 +39,8 @@
                                     <input type="text" name="name" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Alamat</label>
-                                    <input type="text" name="address" class="form-control" required>
+                                    <label for="">Email</label>
+                                    <input type="email" name="email" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">No. WA</label>
@@ -48,8 +48,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Metode Pembayaran</label>
-                                    <select name="payment_method" id="" class="form-control">
+                                    <select name="pg_request[method]" id="" class="form-control">
                                         <option value="">- Pilih Metode Pembayaran -</option>
+                                        <option value="transfer">Transfer Bank (Manual)</option>
+                                        <option value="tripay">Tripay</option>
+                                    </select>
+                                </div>
+                                <div class="form-group tripay" style="display:none">
+                                    <label for="">Pembayaran</label>
+                                    <select name="pg_request[type]" class="form-control">
+                                        <option value="" selected>- Pilih -</option>
+                                        <?php foreach($channels['data'] as $channel): ?>
+                                            <option value="<?=$channel['code']?>"><?=$channel['name']?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -97,6 +108,17 @@
             // var id = document.querySelector('input[name="stands[pic_id]"]').value
             // if(el.id && el.id != id) return;
             // event.target.id = id
+        }
+    })
+
+    document.querySelector("[name='pg_request[method]']").addEventListener("change", e => {
+        if(e.target.value == 'tripay')
+        {
+            document.querySelector('.tripay').style.display = "block";
+        }
+        else
+        {
+            document.querySelector('.tripay').style.display = "none";
         }
     })
     </script>

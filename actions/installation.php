@@ -42,10 +42,16 @@ if(request() == 'POST')
     ]);
     
     // create roles route
-    $role = $db->insert('role_routes',[
-        'role_id' => $role->id,
-        'route_path' => 'transactions/index'
-    ]);
+    foreach([
+        'transactions/index',
+        'transactions/view',
+    ] as $path)
+    {
+        $db->insert('role_routes',[
+            'role_id' => $role->id,
+            'route_path' => $path
+        ]);
+    }
 
     mkdir('uploads');
     mkdir('uploads/pic_file');

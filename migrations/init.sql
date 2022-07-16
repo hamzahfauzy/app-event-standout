@@ -69,3 +69,12 @@ CREATE TABLE transactions (
     pg_response LONGTEXT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_id INT NOT NULL,
+    name VARCHAR(45) NOT NULL,
+    email VARCHAR(45) NOT NULL,
+    phone VARCHAR(45) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

@@ -21,7 +21,7 @@ if(request() == 'POST')
     }
 
     set_flash_msg(['error'=>'Login Gagal! Nama Pengguna atau Kata Sandi tidak cocok']);
-    header('location:'.base_url());
+    header('location:'.routeTo('login'));
     die();
 }
 

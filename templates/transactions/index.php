@@ -15,15 +15,20 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
+                            <?php if($success_msg): ?>
+                            <div class="alert alert-success"><?=$success_msg?></div>
+                            <?php endif ?>
                             <div class="table-responsive table-hover table-sales">
                                 <table class="table datatable">
                                     <thead>
                                         <tr>
                                             <th width="20px">#</th>
+                                            <th>Kustomer</th>
                                             <th>Invoice</th>
                                             <th>Stand</th>
                                             <th>Harga</th>
                                             <th>Status</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -32,13 +37,24 @@
                                             <td>
                                                 <?=$index+1?>
                                             </td>
-                                            <td><?=$transaction->invoice_code?></td>
+                                            <td><?=$transaction->customer?$transaction->customer->name:'-'?></td>
+                                            <td><a href="<?=routeTo('transactions/view',['id'=>$transaction->id])?>"><?=$transaction->invoice_code?></a></td>
                                             <td>
                                                 <?=$transaction->stand->name?><br>
                                                 <i><a href="<?=routeTo('default/event-detail',['id'=>$transaction->stand->event_id])?>"><?=$transaction->stand->event->name?></a></i>
                                             </td>
                                             <td><?=number_format($transaction->amount)?></td>
                                             <td><?=$transaction->status?></td>
+                                            <td>
+                                                <?php if($transaction->status == 'checkout'): ?>
+                                                <a href="<?=routeTo('transactions/confirm',['id'=>$transaction->id])?>" onclick="if(confirm('Apakah anda yakin akan mengkonfirmasi pembayaran ini ?')){return true}else{return false}" class="btn btn-success btn-sm">Konfirmasi</a>
+                                                <a href="<?=routeTo('transactions/decline',['id'=>$transaction->id])?>" onclick="if(confirm('Apakah anda yakin akan menolak pembayaran ini ?')){return true}else{return false}" class="btn btn-danger btn-sm">Tolak</a>
+                                                <?php elseif($transaction->status == 'UNPAID') : ?>
+                                                <i>Menunggu Pembayaran</i>
+                                                <?php else : ?>
+                                                <i>Selesai</i>
+                                                <?php endif ?>
+                                            </td>
                                         </tr>
                                         <?php endforeach ?>
                                     </tbody>

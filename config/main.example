@@ -33,5 +33,8 @@ return [
     'TRIPAY_API_KEY' => '',
     'TRIPAY_PRIVATE_KEY' => '',
     'TRIPAY_MERCHANT_CODE' => '',
-    'TRIPAY_MERCHANT_REF' => ''
+    'TRIPAY_MERCHANT_REF' => '',
+    'WA_BLAST_URL' => '',
+    'WA_BLAST_DEVICE' => '',
+    'WA_BLAST_PLATFORM' => '',
 ];

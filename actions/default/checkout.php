@@ -87,10 +87,26 @@ if(request() == 'POST')
 
     if($checkout_url == null)
     {
-        header('location:'.routeTo('transactions/view',['id' => $transaction->id]));
+        $message = 
+"Checkout untuk produk ".$stand->name." pada event ".$event->name." telah berhasil dengan nilai transaksi sejumlah Rp.".number_format($stand->price)."
+dan dengan kode invoice ".$invoice."
+Silahkan selesaikan pembayaran dengan transfer ke rekening berikut.
+";
+        WaBlast::send($_POST['phone'], $message);
+
+        set_flash_msg(['success'=>'Checkout berhasil']);
+        header('location:'.routeTo('transactions/view',['id'=>$transaction->id]));
     }
     else
     {
+
+        $message = 
+"Checkout untuk produk ".$stand->name." pada event ".$event->name." telah berhasil dengan nilai transaksi sejumlah Rp.".number_format($stand->price)."
+dan dengan kode invoice ".$invoice."
+Silahkan klik link berikut untuk melihat detail pesanan dan cara pembayaran.
+$checkout_url
+";
+        WaBlast::send($_POST['phone'], $message);
         header('location:'.$checkout_url);
     }
     die();

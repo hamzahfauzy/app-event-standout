@@ -18,6 +18,12 @@ if($callback->status)
         ],[
             'invoice' => $merchantRef
         ]);
+        
+        $customer = $db->single('customers',['transaction_id'=>$transaction->id]);
+        
+        $message = "Pembayaran untuk transaksi dengan kode invoice ".$transaction->invoice." telah di terima";
+        WaBlast::send($customer->phone, $message);
+        
         echo json_encode(['success' => true]);
     }
     else

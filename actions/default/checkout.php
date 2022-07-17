@@ -23,7 +23,7 @@ if(request() == 'POST')
     {
         $privateKey = config('TRIPAY_PRIVATE_KEY');
         $merchantCode = config('TRIPAY_MERCHANT_CODE');
-        $merchantRef = config('TRIPAY_MERCHANT_REF');
+        $merchantRef = $invoice;
         
         $signature = hash_hmac('sha256', $merchantCode.$merchantRef.$stand->price, $privateKey);
         $data = [
@@ -33,7 +33,7 @@ if(request() == 'POST')
             'customer_name'     => $_POST['name'],
             'customer_email'    => $_POST['email'],
             'customer_phone'    => $_POST['phone'],
-            'callback_url'      => routeTo('tripay-callback'),
+            'callback_url'      => routeTo('callback/tripay'),
             'order_items'       => [
                 [
                     'sku'       => $event->name,

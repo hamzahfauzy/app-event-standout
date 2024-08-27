@@ -1,5 +1,13 @@
 <?php load_templates('layouts/top') ?>
     <style>
+    path {
+        cursor: pointer;
+    }
+    <?=$sold_style?> {
+        stroke:green !important;
+        stroke-width:2px;
+    }
+
     <?=$pic_style?> {
         stroke:red;
         stroke-width:2px;
@@ -24,7 +32,10 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <?=file_get_contents($event->pic_url)?>
+                            <center>
+                                <?=file_get_contents($event->pic_url)?>
+                            </center>
+                            <br><br>
                             <?php if($success_msg): ?>
                             <div class="alert alert-success"><?=$success_msg?></div>
                             <?php endif ?>
@@ -86,4 +97,19 @@
             </div>
         </div>
     </div>
+    <script>
+    document.querySelectorAll('path').forEach(el => {
+        el.onclick = function(){
+            if(el.id){
+                window.location = 'index.php?r=stands/redirect&pic_id=' + el.id
+            }
+        }
+    })
+    function doSubmit()
+    {
+        event.preventDefault();
+        document.querySelector('input[name=new_svg_content]').value=document.querySelector('svg').outerHTML;
+        document.querySelector('#formStand').submit()
+    }
+    </script>
 <?php load_templates('layouts/bottom') ?>

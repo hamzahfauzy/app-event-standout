@@ -69,11 +69,11 @@
         </div>
     </div>
     <script>
-    document.querySelectorAll('rect').forEach(el => {
+    document.querySelectorAll('path').forEach(el => {
         el.onclick = function(){
             var id = document.querySelector('input[name="stands[pic_id]"]').value
             if(el.id && el.id != id) return;
-            document.querySelectorAll('rect').forEach(e => {
+            document.querySelectorAll('path').forEach(e => {
                 if(e.id == id){
                     e.removeAttribute('id')
                 }

@@ -83,6 +83,11 @@ class Form
                 return $data->{$obj_array[2]};
             }
         }
+
+        if($type == 'number')
+        {
+            return number_format($index);
+        }
         return $index;
     }
 }

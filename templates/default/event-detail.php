@@ -4,6 +4,9 @@
         stroke:red;
         stroke-width:2px;
     }
+    .denah svg {
+        width: 100%;
+    }
 
     <?=$pic_style?> {
         stroke:red;
@@ -22,7 +25,7 @@
             <div class="row row-projects">
                 <div class="col-sm-12 col-lg-8">
                     <div class="card">
-                        <div class="card-body p-2">
+                        <div class="card-body p-2 denah">
                             <h3 class="text-center">Denah Event</h3>
                             <?=file_get_contents($event->pic_url)?>
                             <div id="selected_stand"></div>
@@ -51,9 +54,9 @@
         </div>
     </div>
     <script>
-    document.querySelectorAll('rect').forEach(el => {
+    document.querySelectorAll('path').forEach(el => {
         el.onclick = function(){
-            document.querySelectorAll('rect').forEach(e => {
+            document.querySelectorAll('path').forEach(e => {
                 e.classList.remove('selected')
                 if(e.id)
                 {

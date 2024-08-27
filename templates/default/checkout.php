@@ -49,9 +49,10 @@
                                 <div class="form-group">
                                     <label for="">Metode Pembayaran</label>
                                     <select name="pg_request[method]" id="" class="form-control">
-                                        <option value="">- Pilih Metode Pembayaran -</option>
-                                        <option value="transfer">Transfer Bank (Manual)</option>
-                                        <option value="tripay">Tripay</option>
+                                        <!-- <option value="">- Pilih Metode Pembayaran -</option> -->
+                                        <option value="cash">Cash</option>
+                                        <!-- <option value="transfer">Transfer Bank (Manual)</option>
+                                        <option value="tripay">Tripay</option> -->
                                     </select>
                                 </div>
                                 <div class="form-group tripay" style="display:none">
